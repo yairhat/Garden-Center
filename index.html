@@ -1594,6 +1594,22 @@
         </div>
       </article>
 
+      <!-- Tarjeta 8 -->
+      <article class="product-card clickable-card" onclick="openProductModal('modalMacetas')" tabindex="0" role="button" aria-label="Ver más información sobre Macetas y Decoración" onkeypress="if(event.key==='Enter')openProductModal('modalMacetas')">
+        <div class="product-img">
+          <img src="macetas-decoracion.jpg"
+               alt="Imagen" loading="lazy"/>
+        </div>
+        <div class="product-body">
+          <h3>Macetas y Decoración</h3>
+          <p>Macetas de barro, cerámica y plástico para complementar cualquier planta y espacio.</p>
+          <span class="product-link">
+            Ver m&aacute;s detalles
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -1872,6 +1888,18 @@
     <h3 class="product-modal-title" id="modalUnicasTitle">Plantas Únicas</h3>
     <div class="product-modal-body">
       <p>Encuentra orquídeas híbridas, plantas carnívoras y especies exóticas seleccionadas por su belleza, rareza y atractivo natural. Ideales para coleccionistas y amantes de plantas diferentes y llamativas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Producto 8 -->
+<div class="product-modal" id="modalMacetas" role="dialog" aria-modal="true" aria-labelledby="modalMacetasTitle">
+  <div class="product-modal-bg" onclick="closeProductModal('modalMacetas')"></div>
+  <div class="product-modal-content">
+    <button class="product-modal-close" onclick="closeProductModal('modalMacetas')" aria-label="Cerrar">&times;</button>
+    <h3 class="product-modal-title" id="modalMacetasTitle">Macetas y Decoración</h3>
+    <div class="product-modal-body">
+      <p>Encuentra macetas decorativas y funcionales en distintos tamaños, materiales y estilos. Ideales para interiores, jardines, terrazas y proyectos de decoración natural.</p>
     </div>
   </div>
 </div>
