@@ -1515,7 +1515,7 @@
       </article>
 
       <!-- Tarjeta 3 -->
-      <article class="product-card">
+      <article class="product-card clickable-card" onclick="openProductModal('modalCactus')" tabindex="0" role="button" aria-label="Ver más información sobre Cactus y Suculentas" onkeypress="if(event.key==='Enter')openProductModal('modalCactus')">
         <div class="product-img">
           <img src="Cactus y Suculentas.jpg"
                alt="Macetas decorativas de barro y cerámica de distintos tamaños" loading="lazy"/>
@@ -1523,10 +1523,10 @@
         <div class="product-body">
           <h3>Cactus y Suculentas</h3>
           <p>Colecciones resistentes, elegantes y fáciles de cuidar para cualquier espacio.</p>
-          <a href="https://wa.me/525951041204?text=Hola!%20Me%20interesan%20las%20macetas%2C%20%C2%BFqu%C3%A9%20tienen%20disponibles?" target="_blank" rel="noopener noreferrer" class="product-link" aria-label="Preguntar por macetas">
-            Cotizar por WhatsApp
+          <span class="product-link">
+            Ver m&aacute;s detalles
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </span>
         </div>
       </article>
 
@@ -1797,6 +1797,18 @@
     <h3 class="product-modal-title" id="modalOrnamentalesTitle">Plantas Ornamentales</h3>
     <div class="product-modal-body">
       <p>Descubre una amplia variedad de plantas ornamentales para interiores y exteriores. Desde begonias y lavandas hasta helechos y especies tropicales, ideales para decorar hogares, jardines, oficinas y terrazas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Producto 3 -->
+<div class="product-modal" id="modalCactus" role="dialog" aria-modal="true" aria-labelledby="modalCactusTitle">
+  <div class="product-modal-bg" onclick="closeProductModal('modalCactus')"></div>
+  <div class="product-modal-content">
+    <button class="product-modal-close" onclick="closeProductModal('modalCactus')" aria-label="Cerrar">&times;</button>
+    <h3 class="product-modal-title" id="modalCactusTitle">Cactus y Suculentas</h3>
+    <div class="product-modal-body">
+      <p>Explora cactus y suculentas de distintas formas y tamaños, perfectas para quienes buscan plantas resistentes, decorativas y fáciles de mantener.</p>
     </div>
   </div>
 </div>
