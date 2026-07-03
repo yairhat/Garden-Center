@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-site",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\servi\\AppData\\Local\\Temp\\claude\\C--Users-servi-OneDrive-Documentos-P-ginas-Web-Garden-Center\\c7f100c9-9e1c-4da1-ab7d-80f2e71530fc\\scratchpad\\serve.ps1",
+        "-Port",
+        "5511",
+        "-Root",
+        "C:\\Users\\servi\\OneDrive\\Documentos\\Páginas Web\\Garden Center"
+      ],
+      "port": 5511
+    }
+  ]
+}
