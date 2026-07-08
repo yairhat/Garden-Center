@@ -1567,6 +1567,34 @@
       .how-step h3 { grid-column: 2; font-size: 18px; margin-bottom: 4px; }
       .how-step p { grid-column: 2; font-size: 13.5px; line-height: 1.65; }
     }
+
+    /* ── Móvil: Servicio especial y Nuestra historia compactos ── */
+    @media (max-width: 768px) {
+      /* Servicio especial */
+      #plantas-especiales::after { display: none; }  /* marco decorativo fuera: respeta márgenes */
+      .special-grid { gap: 32px; }
+      .special-tagline { font-size: 26px; margin-bottom: 14px; }
+      .special-left > p:not(.special-tagline) { font-size: 14.5px; line-height: 1.75; margin-bottom: 22px; }
+      .special-steps { margin-bottom: 26px; }
+      .special-step-item { padding: 12px 0; gap: 14px; }
+      .special-step-item strong { font-size: 16px; }
+      .special-step-item span { font-size: 12.5px; }
+      .special-card-main { padding: 22px 16px; margin-bottom: 14px; }
+      .special-card-main h3 { font-size: 19px; margin-bottom: 16px; }
+      .plant-tag { padding: 9px 4px; font-size: 12px; }
+      .special-promise { padding: 16px 18px; gap: 14px; }
+      .special-promise strong { font-size: 16px; }
+      .special-promise span { font-size: 12px; }
+      /* Nuestra historia */
+      .about-grid { gap: 36px; }
+      .about-img-main img { height: 250px; }
+      .about-text > p { font-size: 15px; line-height: 1.75; }
+      .about-list { margin: 24px 0; }
+      .about-list-title { font-size: 18px; margin-bottom: 12px; }
+      .about-list-item { padding: 12px 0; gap: 12px; font-size: 14px; line-height: 1.65; }
+      .about-yt { margin-top: 20px; gap: 14px; }
+      .about-yt p { font-size: 14px; }
+    }
   </style>
 </head>
 
