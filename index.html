@@ -128,51 +128,6 @@
     ::selection { background: var(--gold); color: var(--white); }
 
     /* ═══════════════════════════════════════════════════════
-       TEXTURA GLOBAL — "papel rasposo" (opción C)
-       Dos capas: mancha áspera (multiply) + grano fino
-       (soft-light). Va encima de las secciones pero DEBAJO
-       del navbar (1000) y modales (2000). No captura clics.
-       Para calibrar: ajusta las 'opacity' de abajo.
-    ═══════════════════════════════════════════════════════ */
-    body::before, body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 900;
-      pointer-events: none;
-    }
-    body::before {
-      opacity: .58;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='rasp'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23rasp)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
-    body::after {
-      opacity: .32;
-      mix-blend-mode: soft-light;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23fine)'/%3E%3C/svg%3E");
-      background-size: 110px 110px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       TEXTURA GRANULADA — grano orgánico tipo pintado/lienzo
-       Capa fija encima de las secciones, DEBAJO de navbar (1000)
-       y modales (2000). No captura clics. Fácil de calibrar:
-       sube/baja 'opacity'.
-    ═══════════════════════════════════════════════════════ */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 900;
-      pointer-events: none;
-      opacity: .55;
-      mix-blend-mode: soft-light;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
-      background-size: 240px 240px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
        UTILIDADES
     ═══════════════════════════════════════════════════════ */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
@@ -952,9 +907,20 @@
     .serv-card p { font-size: 14.5px; color: var(--muted); line-height: 1.8; }
     .serv-cta { text-align: center; }
     @media (max-width: 768px) {
-      .serv-grid { grid-template-columns: 1fr; gap: 16px; }
-      .serv-card { padding: 30px 24px; }
-      .serv-card h3 { font-size: 21px; }
+      .serv-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 34px; }
+      .serv-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 16px;
+        align-items: start;
+        padding: 22px 20px;
+      }
+      .serv-icon { grid-row: 1 / span 2; margin-bottom: 0; padding-top: 3px; }
+      .serv-icon svg { width: 26px; height: 26px; }
+      .serv-card:hover { transform: none; }
+      .serv-card h3 { font-size: 18.5px; margin-bottom: 5px; line-height: 1.25; }
+      .serv-card p { font-size: 13.5px; line-height: 1.6; }
+      .serv-cta .btn { display: block; width: 100%; }
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -1725,6 +1691,31 @@
       .about-list-item { padding: 12px 0; gap: 12px; font-size: 14px; line-height: 1.65; }
       .about-yt { margin-top: 20px; gap: 14px; }
       .about-yt p { font-size: 14px; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TEXTURA POR SECCIÓN
+       · Claras   → limewash (yeso encalado, nubes suaves)
+       · Oscuras  → granulado (grano rasposo)
+       · Hero     → SIN textura (queda limpio)
+       Se aplica al FONDO de cada sección (detrás del texto y
+       las fotos), así la textura vive en la "pared", no sobre
+       los objetos. Calibrar: limewash → slope/intercept;
+       granulado → background-blend-mode o slope/intercept.
+    ═══════════════════════════════════════════════════════ */
+    #nosotros, #productos, #como-trabajamos, #jardineria, #galeria, #contacto {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Cfilter id='lw'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' seed='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.22' intercept='0.8'/%3E%3CfeFuncG type='linear' slope='0.22' intercept='0.8'/%3E%3CfeFuncB type='linear' slope='0.22' intercept='0.8'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='560' height='560' filter='url(%23lw)'/%3E%3C/svg%3E");
+      background-size: 560px 560px;
+      background-repeat: repeat;
+      background-blend-mode: multiply;
+    }
+    #plantas-especiales, #resenas, #cta-final, footer {
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='grc'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.4' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.55' intercept='0.22'/%3E%3CfeFuncG type='linear' slope='0.55' intercept='0.22'/%3E%3CfeFuncB type='linear' slope='0.55' intercept='0.22'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23grc)'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='grf'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.45' intercept='0.28'/%3E%3CfeFuncG type='linear' slope='0.45' intercept='0.28'/%3E%3CfeFuncB type='linear' slope='0.45' intercept='0.28'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23grf)'/%3E%3C/svg%3E");
+      background-size: 220px 220px, 120px 120px;
+      background-repeat: repeat, repeat;
+      background-blend-mode: soft-light, soft-light;
     }
   </style>
 </head>
