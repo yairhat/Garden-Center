@@ -128,6 +128,51 @@
     ::selection { background: var(--gold); color: var(--white); }
 
     /* ═══════════════════════════════════════════════════════
+       TEXTURA GLOBAL — "papel rasposo" (opción C)
+       Dos capas: mancha áspera (multiply) + grano fino
+       (soft-light). Va encima de las secciones pero DEBAJO
+       del navbar (1000) y modales (2000). No captura clics.
+       Para calibrar: ajusta las 'opacity' de abajo.
+    ═══════════════════════════════════════════════════════ */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      pointer-events: none;
+    }
+    body::before {
+      opacity: .58;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='rasp'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23rasp)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+    body::after {
+      opacity: .32;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23fine)'/%3E%3C/svg%3E");
+      background-size: 110px 110px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TEXTURA GRANULADA — grano orgánico tipo pintado/lienzo
+       Capa fija encima de las secciones, DEBAJO de navbar (1000)
+       y modales (2000). No captura clics. Fácil de calibrar:
+       sube/baja 'opacity'.
+    ═══════════════════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      pointer-events: none;
+      opacity: .55;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 240px 240px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
        UTILIDADES
     ═══════════════════════════════════════════════════════ */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
@@ -864,6 +909,53 @@
       margin-bottom: 6px;
     }
     .how-banner-text span { font-size: 14px; color: rgba(247,244,234,.6); }
+
+    /* ═══════════════════════════════════════════════════════
+       SERVICIO DE JARDINERÍA
+    ═══════════════════════════════════════════════════════ */
+    #jardineria { background: var(--bg-2); }
+    .serv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 52px;
+    }
+    .serv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 42px 34px 38px;
+      transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out), border-color .5s;
+    }
+    .serv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(169,139,79,.35);
+    }
+    .serv-icon { margin-bottom: 20px; }
+    .serv-icon svg {
+      width: 34px; height: 34px;
+      color: var(--primary);
+      stroke-width: 1.3;
+      display: block;
+      transition: transform .5s var(--ease-out);
+    }
+    .serv-card:hover .serv-icon svg { transform: translateY(-4px); }
+    .serv-card h3 {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .serv-card p { font-size: 14.5px; color: var(--muted); line-height: 1.8; }
+    .serv-cta { text-align: center; }
+    @media (max-width: 768px) {
+      .serv-grid { grid-template-columns: 1fr; gap: 16px; }
+      .serv-card { padding: 30px 24px; }
+      .serv-card h3 { font-size: 21px; }
+    }
 
     /* ═══════════════════════════════════════════════════════
        PLANTAS ESPECIALES
@@ -1674,6 +1766,7 @@
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#productos">Productos</a></li>
         <li><a href="#como-trabajamos">C&oacute;mo trabajamos</a></li>
+        <li><a href="#jardineria">Jardiner&iacute;a</a></li>
         <li><a href="#plantas-especiales">Plantas especiales</a></li>
         <li><a href="#galeria">Galer&iacute;a</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -1707,6 +1800,7 @@
   <a href="#nosotros"          onclick="closeMobileMenu()">Nosotros</a>
   <a href="#productos"         onclick="closeMobileMenu()">Productos</a>
   <a href="#como-trabajamos"   onclick="closeMobileMenu()">C&oacute;mo trabajamos</a>
+  <a href="#jardineria"        onclick="closeMobileMenu()">Jardiner&iacute;a</a>
   <a href="#plantas-especiales" onclick="closeMobileMenu()">Plantas especiales</a>
   <a href="#galeria"           onclick="closeMobileMenu()">Galer&iacute;a</a>
   <a href="#contacto"          onclick="closeMobileMenu()">Contacto</a>
@@ -2053,6 +2147,73 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SERVICIO DE JARDINERÍA
+     Botón directo al WhatsApp del jardinero: 56 1586 7238
+═══════════════════════════════════════════════════════ -->
+<section id="jardineria" class="section-pad" aria-labelledby="jardineria-title">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="label">Servicio de jardiner&iacute;a</span>
+      <h2 class="section-title" id="jardineria-title">Llevamos el vivero hasta tu jard&iacute;n</h2>
+      <p class="section-desc" style="margin:0 auto;">M&aacute;s all&aacute; de vender plantas, dise&ntilde;amos, nutrimos y mantenemos tus espacios verdes con manos expertas.</p>
+    </div>
+
+    <div class="serv-grid">
+      <!-- Servicio 1 -->
+      <article class="serv-card">
+        <div class="serv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+          </svg>
+        </div>
+        <h3>Dise&ntilde;o de jardines</h3>
+        <p>Creamos y ejecutamos espacios verdes a tu medida, combinando est&eacute;tica, funcionalidad y armon&iacute;a con el entorno.</p>
+      </article>
+
+      <!-- Servicio 2 -->
+      <article class="serv-card">
+        <div class="serv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.5S5 9 5 14a7 7 0 0014 0c0-5-7-11.5-7-11.5z"/>
+            <path d="M12 22V12"/>
+            <path d="M12 16l2.5-2.5"/>
+          </svg>
+        </div>
+        <h3>Nutrici&oacute;n de plantas</h3>
+        <p>Diagn&oacute;stico y planes de nutrici&oacute;n especializados para que tus plantas crezcan sanas, fuertes y vigorosas.</p>
+      </article>
+
+      <!-- Servicio 3 -->
+      <article class="serv-card">
+        <div class="serv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/>
+            <circle cx="6" cy="18" r="3"/>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+            <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3>Poda y mantenimiento</h3>
+        <p>Poda, control de plagas y cuidado preventivo para conservar tus &aacute;reas verdes siempre impecables.</p>
+      </article>
+    </div>
+
+    <div class="serv-cta">
+      <!-- EDITA: número del jardinero (525615867238) -->
+      <a href="https://wa.me/525615867238?text=%C2%A1Hola!%20Vi%20la%20p%C3%A1gina%20de%20Garden%20Center%20Marysia%20y%20me%20gustar%C3%ADa%20cotizar%20el%20servicio%20de%20jardiner%C3%ADa."
+         class="btn btn-primary"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Cotizar servicio de jardinería por WhatsApp">
+        Cotizar por WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
